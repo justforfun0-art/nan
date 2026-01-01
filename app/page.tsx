@@ -1,10 +1,11 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import InfluencerForm from '@/components/InfluencerForm';
 
 import { sora } from "./fonts";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 /* ============================================
    UTILITY COMPONENTS
@@ -176,12 +177,23 @@ function WalletIcon({ className }: { className?: string }) {
   );
 }
 
+function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="4" y1="18" x2="20" y2="18" />
+    </svg>
+  );
+}
+
 /* ============================================
    MAIN PAGE COMPONENT
 ============================================ */
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -196,50 +208,106 @@ export default function Home() {
 
       {/* Content wrapper */}
       <div className="relative z-10">
-     {/* ==================== NAVIGATION ==================== */}
-<nav className="fixed top-0 left-0 right-0 z-50 p-4">
-  <div className="max-w-6xl mx-auto">
-    <div className="flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
+        
+        {/* ==================== NAVIGATION ==================== */}
+        <nav className="fixed top-0 left-0 right-0 z-50 p-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
 
-      {/* Logo */}
-      <div className="flex items-center gap-3">
-        <img
-          src="/logo.png"
-          alt="Nanofluencers Logo"
-          className="h-8 md:h-16 w-auto"
-        />
+              {/* Logo - Centered on mobile via 'flex-1 justify-center' tricks or absolute positioning */}
+              {/* On desktop: standard flex row. On mobile: Logo absolute center, Hamburger left/right? 
+                  Let's do: Hamburger Left, Logo Center, Empty Right (or profile). 
+                  Or simpler: Logo Left, Hamburger Right. 
+                  User asked: "keep the text at the center for mobile view".
+              */}
+              
+              {/* 1. Mobile Menu Button (Hamburger) - Visible ONLY on Mobile */}
+              <div className="md:hidden"> 
+                <button 
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="p-2 text-white/70 hover:text-white transition-colors"
+                >
+                  <MenuIcon className="w-6 h-6" />
+                </button>
+              </div>
 
-        <span
-          className={`
-            block
-            text-xl md:text-3xl
-            font-extrabold tracking-tight
-            bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
-            bg-clip-text text-transparent
-            animate-gradient
-            ${sora.className}
-          `}
-        >
-          NanoFluencers
-        </span>
-      </div>
+              {/* 2. Logo - Centered on Mobile, Left on Desktop */}
+              <div className="flex-1 flex justify-center md:justify-start items-center gap-3">
+                <img
+                  src="/logo.png"
+                  alt="Nanofluencers Logo"
+                  className="h-8 md:h-16 w-auto"
+                />
 
-      {/* Menu */}
-      <div className="flex items-center gap-3">
-        <a href="#features" className="px-2 md:px-4 py-2 text-xs md:text-sm text-white/60 hover:text-white">
-          Features
-        </a>
-        <a href="#platforms" className="px-2 md:px-4 py-2 text-xs md:text-sm text-white/60 hover:text-white">
-          Platforms
-        </a>
-        <a href="/admin" className="px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
-          Admin
-        </a>
-      </div>
+                <span
+                  className={`
+                    block
+                    text-xl md:text-3xl
+                    font-extrabold tracking-tight
+                    bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
+                    bg-clip-text text-transparent
+                    animate-gradient
+                    ${sora.className}
+                  `}
+                >
+                  NanoFluencers
+                </span>
+              </div>
 
-    </div>
-  </div>
-</nav>
+              {/* 3. Desktop Menu - Hidden on Mobile */}
+              <div className="hidden md:flex items-center gap-3">
+                <a href="#features" className="px-4 py-2 text-sm text-white/60 hover:text-white">
+                  Features
+                </a>
+                <a href="#platforms" className="px-4 py-2 text-sm text-white/60 hover:text-white">
+                  Platforms
+                </a>
+                <a href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
+                  Admin
+                </a>
+              </div>
+
+              {/* Spacer for Mobile to balance the flex center (Optional, makes logo perfectly centered) */}
+              <div className="w-10 md:hidden" /> 
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, y: -20, height: 0 }}
+                  className="md:hidden mt-2 overflow-hidden bg-[#0f0520]/95 backdrop-blur-xl rounded-2xl border border-white/10"
+                >
+                  <div className="flex flex-col p-4 space-y-2">
+                    <a 
+                      href="#features" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-center text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    >
+                      Features
+                    </a>
+                    <a 
+                      href="#platforms" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-center text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    >
+                      Platforms
+                    </a>
+                    <a 
+                      href="/admin" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-center font-semibold text-white bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/30 rounded-xl transition-all"
+                    >
+                      Admin Panel
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </nav>
 
 
         {/* ==================== HERO SECTION ==================== */}
@@ -575,24 +643,22 @@ export default function Home() {
               <div className="md:col-span-2">
                 <div className="flex items-center gap-3 mb-5">
                   <img
-  src="/logo.png"
-  alt="Nanofluencers Logo"
-  className="h-10 w-auto"
-/>
-              <span
-  className={`
-    text-xl md:text-2xl
-    font-extrabold tracking-tight
-    bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
-    bg-clip-text text-transparent
-    animate-gradient
-    ${sora.className}
-  `}
->
-  NanoFluencers
-</span>
-
-
+                    src="/logo.png"
+                    alt="Nanofluencers Logo"
+                    className="h-10 w-auto"
+                  />
+                  <span
+                    className={`
+                      text-xl md:text-2xl
+                      font-extrabold tracking-tight
+                      bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
+                      bg-clip-text text-transparent
+                      animate-gradient
+                      ${sora.className}
+                    `}
+                  >
+                    NanoFluencers
+                  </span>
                 </div>
                 <p className="text-white/40 text-base max-w-xs leading-relaxed">
                   India's premier platform connecting nano and micro-influencers with top brands.
