@@ -64,7 +64,7 @@ export default function DashboardClient({ initialSubmissions }: DashboardClientP
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold text-purple-600">Admin Dashboard</h1>
-              <p className="text-sm text-gray-600">nanofluencers.com</p>
+              <p className="text-sm text-gray-600">NanoFluencer.com</p>
             </div>
             <div className="flex items-center gap-4">
               <a

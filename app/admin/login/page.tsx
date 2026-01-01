@@ -49,7 +49,7 @@ export default function AdminLogin() {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-purple-600 mb-2">Admin Login</h1>
-            <p className="text-gray-600">nanofluencers.com</p>
+            <p className="text-gray-600">NanoFluencer.com</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
@@ -63,7 +63,7 @@ export default function AdminLogin() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                placeholder="admin@nanofluencers.com"
+                placeholder="admin@NanoFluencer.com"
               />
             </div>
 

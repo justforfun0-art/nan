@@ -4,17 +4,17 @@ import Providers from "./providers";
 import { inter } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "Nanofluencers - Connect with Micro-Influencers in India",
+  title: "NanoFluencer - Connect with Micro-Influencers in India",
   description:
     "Join India's premier platform for nano and micro-influencers. Connect with brands, grow your influence, and monetize your content.",
   keywords:
     "influencers, micro-influencers, nano-influencers, India, social media, Instagram, YouTube, Facebook",
   openGraph: {
-    title: "Nanofluencers - Connect with Micro-Influencers in India",
+    title: "NanoFluencer - Connect with Micro-Influencers in India",
     description:
       "Join India's premier platform for nano and micro-influencers.",
-    url: "https://nanofluencers.com",
-    siteName: "Nanofluencers",
+    url: "https://NanoFluencer.com",
+    siteName: "NanoFluencer",
     type: "website",
   },
 };

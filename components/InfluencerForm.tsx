@@ -302,7 +302,7 @@ export default function InfluencerForm({ onSuccess }: InfluencerFormProps) {
             className="mt-1 w-5 h-5 rounded border-white/30 bg-transparent text-violet-500 focus:ring-violet-500/20"
           />
           <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
-            I consent to nanofluencers.com storing and processing my information for the purpose
+            I consent to NanoFluencer.com storing and processing my information for the purpose
             of connecting me with brand partnerships. I understand that my data will be handled
             according to the privacy policy. <span className="text-pink-400">*</span>
           </span>

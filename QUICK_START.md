@@ -1,4 +1,4 @@
-# 🚀 Quick Start - Nanofluencers.com
+# 🚀 Quick Start - Nanofluencer.com
 
 Your production-ready influencer platform is ready! Follow these 3 simple steps to get started:
 
@@ -39,7 +39,7 @@ To access the admin dashboard:
 
 1. Go to: https://supabase.com/dashboard/project/tjekufdbaxafqmsyiovw/auth/users
 2. Click **Add user** → **Create new user**
-3. Enter email: `admin@nanofluencers.com` (or any email you want)
+3. Enter email: `admin@nanofluencer.com` (or any email you want)
 4. Create a password
 5. Toggle ON: **Auto Confirm User**
 6. Click **Create user**
@@ -95,7 +95,7 @@ When ready to deploy:
 4. Add environment variables from `.env.local`
 5. Deploy!
 
-Your site will be live at: `https://nanofluencers.com`
+Your site will be live at: `https://nanofluencer.com`
 
 ---
 

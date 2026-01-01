@@ -1,4 +1,4 @@
-# Nanofluencers.com
+# NanoFluencer.com
 
 A modern, production-ready platform for connecting micro-influencers with brands in India.
 
@@ -190,4 +190,4 @@ For issues or questions, please create an issue in the repository.
 
 ## License
 
-All rights reserved - nanofluencers.com
+All rights reserved - NanoFluencer.com

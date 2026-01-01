@@ -1,4 +1,4 @@
-# Quick Setup Guide for Nanofluencers.com
+# Quick Setup Guide for NanoFluencer.com
 
 ## Step-by-Step Setup
 
@@ -40,7 +40,7 @@
 3. Click **Add user** button (top right)
 4. Select **Create new user**
 5. Enter:
-   - Email: `admin@nanofluencers.com` (or your preferred email)
+   - Email: `admin@NanoFluencer.com` (or your preferred email)
    - Password: Choose a strong password
    - Auto Confirm User: **Enable this** (toggle on)
 6. Click **Create user**
@@ -137,7 +137,7 @@
 ### Update Domain
 
 1. In Vercel, go to **Settings** → **Domains**
-2. Add `nanofluencers.com`
+2. Add `NanoFluencer.com`
 3. Update your DNS settings (your domain registrar):
    - Add A record: `76.76.21.21`
    - Add CNAME: `cname.vercel-dns.com`
