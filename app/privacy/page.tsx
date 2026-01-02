@@ -68,7 +68,11 @@ export default function PrivacyPolicy() {
 
             <section>
                 <h2 className="text-2xl font-bold text-white mb-4">6. Contact Us</h2>
+<<<<<<< HEAD
                 <p>If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:nanofluencer@gmail.com" className="text-violet-400 hover:text-violet-300 underline">nanofluencer@gmail.com</a></p>
+=======
+                <p>If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:nanofluencermedia@gmail.com" className="text-violet-400 hover:text-violet-300 underline">nanofluencermedia@gmail.com</a></p>
+>>>>>>> ca691ba (New links)
             </section>
         </motion.div>
       </div>
