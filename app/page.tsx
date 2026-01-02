@@ -487,7 +487,10 @@ export default function Home() {
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">{platform.name}</h3>
                       <p className="text-white/50 text-base mb-6">{platform.members} influencers</p>
-                      <button className={`px-6 py-3 rounded-full bg-gradient-to-r ${platform.gradient} text-white text-sm font-semibold hover:opacity-90 transition-opacity`}>
+                      <button 
+                        onClick={() => setShowForm(true)}
+                        className={`px-6 py-3 rounded-full bg-gradient-to-r ${platform.gradient} text-white text-sm font-semibold hover:opacity-90 transition-opacity`}
+                      >
                         Connect Now →
                       </button>
                     </div>
