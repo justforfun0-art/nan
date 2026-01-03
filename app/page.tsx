@@ -587,7 +587,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ==================== FOOTER ==================== */}
+             {/* ==================== FOOTER ==================== */}
         <footer className="py-20 md:py-24 px-6 border-t border-white/10">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-4 gap-12 mb-16">
@@ -595,7 +595,7 @@ export default function Home() {
                 <div className="flex items-center gap-3 mb-5">
                   <img
                     src="/logo.png"
-                    alt="Nanofluencer Logo"
+                    alt="Nanofluencers Logo"
                     className="h-10 w-auto"
                   />
                   <span
@@ -608,7 +608,7 @@ export default function Home() {
                       ${sora.className}
                     `}
                   >
-                    NanoFluencer
+                    NanoFluencers
                   </span>
                 </div>
                 <p className="text-white/40 text-base max-w-xs leading-relaxed">
@@ -619,8 +619,8 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-5">Platform</h4>
                 <div className="space-y-4">
-                  <button onClick={() => handleScrollToSection('features')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</button>
-                  <button onClick={() => handleScrollToSection('platforms')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</button>
+                  <a href="#features" onClick={(e) => handleScrollToSection(e, 'features')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</a>
+                  <a href="#platforms" onClick={(e) => handleScrollToSection(e, 'platforms')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</a>
                   <a href="#" className="block text-white/40 hover:text-white text-base transition-colors">For Brands</a>
                 </div>
               </div>
@@ -628,15 +628,22 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-5">Legal</h4>
                 <div className="space-y-4">
-                  <a href="/privacy" className="block text-white/40 hover:text-white text-base transition-colors">Privacy Policy</a>
-                  <a href="/terms" className="block text-white/40 hover:text-white text-base transition-colors">Terms of Service</a>
-                  <a href="/contact" className="block text-white/40 hover:text-white text-base transition-colors">Contact Us</a>
+                  {/* FIX: Changed <a> to <Link> for proper routing */}
+                  <Link href="/privacy" className="block text-white/40 hover:text-white text-base transition-colors">
+                    Privacy Policy
+                  </Link>
+                  <Link href="/terms" className="block text-white/40 hover:text-white text-base transition-colors">
+                    Terms of Service
+                  </Link>
+                  <Link href="/contact" className="block text-white/40 hover:text-white text-base transition-colors">
+                    Contact Us
+                  </Link>
                 </div>
               </div>
             </div>
             
             <div className="pt-10 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-6">
-              <p className="text-white/30 text-base">© 2025 NanoFluencer.com</p>
+              <p className="text-white/30 text-base">© 2026 nanofluencers.com</p>
               <div className="flex gap-4">
                 {[InstagramIcon, YoutubeIcon, FacebookIcon].map((Icon, i) => (
                   <a key={i} href="#" className="w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white transition-all">
