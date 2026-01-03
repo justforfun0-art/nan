@@ -222,18 +222,23 @@ export default function Home() {
                 <img
                   src="/logo.png"
                   alt="Nanofluencer Logo"
-                  className="h-12 md:h-16 w-auto"
+                  className="h-14 md:h-16 w-auto"
                 />
-                <span
+             <span
                   className={`
                     block
-                    text-xl md:text-4xl
+                    text-[1.8rem] md:text-4xl  /* CHANGED: Bigger mobile text (approx 29px) */
                     font-extrabold tracking-tight
+                    text-white
                     bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
                     bg-clip-text text-transparent
                     animate-gradient
+                    pb-1
                     ${sora.className}
                   `}
+                >
+                  NanoFluencers
+                </span>
                 >
                   NanoFluencer
                 </span>
