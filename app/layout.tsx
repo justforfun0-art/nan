@@ -4,17 +4,14 @@ import Providers from "./providers";
 import { inter } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "NanoFluencer - Connect with Micro-Influencers in India",
-  description:
-    "Join India's premier platform for nano and micro-influencers. Connect with brands, grow your influence, and monetize your content.",
-  keywords:
-    "influencers, micro-influencers, nano-influencers, India, social media, Instagram, YouTube, Facebook",
+  title: "Nanofluencer - The Micro-Influencer Marketplace",
+  description: "Connect with brands and earn money as a nano or micro-influencer in India. Join thousands of creators.",
+  keywords: "influencers, micro-influencers, nano-influencers, India, social media, Instagram, YouTube, Facebook",
   openGraph: {
-    title: "NanoFluencer - Connect with Micro-Influencers in India",
-    description:
-      "Join India's premier platform for nano and micro-influencers.",
-    url: "https://NanoFluencer.com",
-    siteName: "NanoFluencer",
+    title: "Nanofluencer - The Micro-Influencer Marketplace",
+    description: "Connect with brands and earn money as a nano or micro-influencer in India.",
+    url: "https://nanofluencer.com",
+    siteName: "Nanofluencer",
     type: "website",
   },
 };
@@ -27,8 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
