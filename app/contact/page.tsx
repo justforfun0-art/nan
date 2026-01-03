@@ -26,11 +26,40 @@ function MapPinIcon({ className }: { className?: string }) {
 export default function ContactUs() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate API call
-    setTimeout(() => setStatus('success'), 1500);
+
+    const form = e.target as HTMLFormElement;
+    const formData = {
+      firstName: (form.elements.namedItem('first_name') as HTMLInputElement).value,
+      lastName: (form.elements.namedItem('last_name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      subject: (form.elements.namedItem('subject') as HTMLSelectElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+      } else {
+        alert("Failed to send message. Please try again.");
+        setStatus('idle');
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+      setStatus('idle');
+    }
   };
 
   return (
@@ -66,8 +95,8 @@ export default function ContactUs() {
                         </div>
                         <div>
                             <p className="text-white/50 text-sm mb-1">Email Us</p>
-                            <a href="mailto:nanofluencermedia@gmail.com" className="text-xl font-semibold text-white hover:text-violet-300 transition-colors">
-                                nanofluencermedia@gmail.com
+                            <a href="mailto:support@nanofluencer.com" className="text-xl font-semibold text-white hover:text-violet-300 transition-colors">
+                                support@nanofluencer.com
                             </a>
                             <p className="text-white/40 text-sm mt-2">Typical response time: 24 hours</p>
                         </div>
@@ -110,22 +139,22 @@ export default function ContactUs() {
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-white/70">First Name</label>
-                                <input type="text" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="John" />
+                                <input type="text" name="first_name" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="John" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-white/70">Last Name</label>
-                                <input type="text" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="Doe" />
+                                <input type="text" name="last_name" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="Doe" />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-white/70">Email Address</label>
-                            <input type="email" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="john@example.com" />
+                            <input type="email" name="email" required className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="john@example.com" />
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-white/70">Subject</label>
-                            <select className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors">
+                            <select name="subject" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors">
                                 <option>General Inquiry</option>
                                 <option>I'm an Influencer</option>
                                 <option>I'm a Brand</option>
@@ -135,7 +164,7 @@ export default function ContactUs() {
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-white/70">Message</label>
-                            <textarea required rows={4} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="How can we help you?" />
+                            <textarea name="message" required rows={4} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500 transition-colors" placeholder="How can we help you?" />
                         </div>
 
                         <button 
