@@ -1,10 +1,8 @@
-import { Metadata } from "next";
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import InfluencerForm from '@/components/InfluencerForm';
-
 import { sora } from "./fonts";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -182,17 +180,6 @@ function WalletIcon({ className }: { className?: string }) {
    MAIN PAGE COMPONENT
 ============================================ */
 
-
-export const metadata: Metadata = {
-  title: "Nanofluencer - The Micro-Influencer Marketplace",
-  description: "Connect with brands and earn money as a nano or micro-influencer in India. Join thousands of creators.",
-  openGraph: {
-    title: "Nanofluencer - The Micro-Influencer Marketplace",
-    description: "Connect with brands and earn money as a nano or micro-influencer in India.",
-    type: "website",
-  },
-};
-
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -237,8 +224,6 @@ export default function Home() {
                   alt="Nanofluencer Logo"
                   className="h-12 md:h-16 w-auto"
                 />
-
-                
               </div>
 
               {/* Desktop Menu - Hidden on Mobile */}
