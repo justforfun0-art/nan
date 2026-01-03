@@ -229,7 +229,6 @@ export default function Home() {
                     block
                     text-[1.8rem] md:text-4xl
                     font-extrabold tracking-tight
-                    text-white
                     bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
                     bg-clip-text text-transparent
                     animate-gradient
