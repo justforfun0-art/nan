@@ -5,7 +5,7 @@ import Link from 'next/link';
 import InfluencerForm from '@/components/InfluencerForm';
 
 import { sora } from "./fonts";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 /* ============================================
    UTILITY COMPONENTS
@@ -177,22 +177,36 @@ function WalletIcon({ className }: { className?: string }) {
   );
 }
 
+function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="4" y1="18" x2="20" y2="18" />
+    </svg>
+  );
+}
+
 /* ============================================
    MAIN PAGE COMPONENT
 ============================================ */
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-  // Scroll handler for desktop navigation
-  const handleScrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  // FIX: Custom scroll handler to account for fixed header
+  const handleScrollToSection = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false); // Close menu
+    
+    const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 100;
+      const headerOffset = 100; // Adjust this value based on your header height
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -218,18 +232,28 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
 
-              {/* Logo - Centered on Mobile, Left on Desktop */}
+              {/* 1. Mobile Menu Button (Hamburger) */}
+              <div className="md:hidden"> 
+                <button 
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="p-2 text-white/70 hover:text-white transition-colors"
+                >
+                  <MenuIcon className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* 2. Logo - Centered on Mobile */}
               <div className="flex-1 flex justify-center md:justify-start items-center gap-3">
                 <img
                   src="/logo.png"
-                  alt="Nanofluencer Logo"
-                  className="h-12 md:h-16 w-auto"
+                  alt="Nanofluencers Logo"
+                  className="h-8 md:h-16 w-auto"
                 />
 
                 <span
                   className={`
                     block
-                    text-2xl md:text-4xl
+                    text-2xl md:text-4xl  /* CHANGED: Bigger size here */
                     font-extrabold tracking-tight
                     bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
                     bg-clip-text text-transparent
@@ -237,29 +261,65 @@ export default function Home() {
                     ${sora.className}
                   `}
                 >
-                  NanoFluencer
+                  NanoFluencers
                 </span>
               </div>
 
-              {/* Desktop Menu - Hidden on Mobile */}
+              {/* 3. Desktop Menu */}
               <div className="hidden md:flex items-center gap-3">
-                <button 
-                  onClick={() => handleScrollToSection('features')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
-                >
+                <a href="#features" onClick={(e) => handleScrollToSection(e, 'features')} className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer">
                   Features
-                </button>
-                <button 
-                  onClick={() => handleScrollToSection('platforms')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
-                >
+                </a>
+                <a href="#platforms" onClick={(e) => handleScrollToSection(e, 'platforms')} className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer">
                   Platforms
-                </button>
+                </a>
                 <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
                   Admin
                 </Link>
               </div>
+
+              {/* Spacer for Mobile to balance the flex center */}
+              <div className="w-10 md:hidden" /> 
             </div>
+
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, y: -20, height: 0 }}
+                  className="md:hidden mt-2 overflow-hidden bg-[#0f0520]/95 backdrop-blur-xl rounded-2xl border border-white/10 relative z-50"
+                >
+                  <div className="flex flex-col p-4 space-y-2">
+                    {/* BUTTON 1: Features */}
+                    <button
+                      onClick={(e) => handleScrollToSection(e, 'features')}
+                      className="block w-full text-left px-4 py-3 text-center text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all cursor-pointer"
+                    >
+                      Features
+                    </button>
+
+                    {/* BUTTON 2: Platforms */}
+                    <button
+                      onClick={(e) => handleScrollToSection(e, 'platforms')}
+                      className="block w-full text-left px-4 py-3 text-center text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all cursor-pointer"
+                    >
+                      Platforms
+                    </button>
+                    
+                    {/* BUTTON 3: Admin (Standard Link) */}
+                    <Link 
+                      href="/admin" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-4 py-3 text-center font-semibold text-white bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/30 rounded-xl transition-all"
+                    >
+                      Admin Panel
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </nav>
 
@@ -268,6 +328,7 @@ export default function Home() {
           style={{ opacity: heroOpacity }}
           className="min-h-screen flex items-center justify-center px-6 pt-28 pb-20"
         >
+          {/* ... Hero Content ... */}
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -317,12 +378,13 @@ export default function Home() {
               >
                 Start Earning Today →
               </button>
-              <button
-                onClick={() => handleScrollToSection('features')}
+              <a
+                href="#features"
+                onClick={(e) => handleScrollToSection(e, 'features')}
                 className="px-8 py-4 rounded-2xl font-semibold text-white/80 bg-white/5 border border-white/20 hover:bg-white/10 transition-all cursor-pointer"
               >
                 Learn More
-              </button>
+              </a>
             </motion.div>
 
             <motion.div
@@ -487,10 +549,7 @@ export default function Home() {
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">{platform.name}</h3>
                       <p className="text-white/50 text-base mb-6">{platform.members} influencers</p>
-                      <button 
-                        onClick={() => setShowForm(true)}
-                        className={`px-6 py-3 rounded-full bg-gradient-to-r ${platform.gradient} text-white text-sm font-semibold hover:opacity-90 transition-opacity`}
-                      >
+                      <button className={`px-6 py-3 rounded-full bg-gradient-to-r ${platform.gradient} text-white text-sm font-semibold hover:opacity-90 transition-opacity`}>
                         Connect Now →
                       </button>
                     </div>
@@ -587,7 +646,7 @@ export default function Home() {
           </div>
         </section>
 
-             {/* ==================== FOOTER ==================== */}
+        {/* ==================== FOOTER ==================== */}
         <footer className="py-20 md:py-24 px-6 border-t border-white/10">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-4 gap-12 mb-16">
@@ -628,7 +687,6 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-5">Legal</h4>
                 <div className="space-y-4">
-                  {/* FIX: Changed <a> to <Link> for proper routing */}
                   <Link href="/privacy" className="block text-white/40 hover:text-white text-base transition-colors">
                     Privacy Policy
                   </Link>
