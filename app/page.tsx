@@ -217,7 +217,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
 
-              {/* Left Side: Logo + Text */}
+              {/* Logo - Centered on Mobile, Left on Desktop */}
               <div className="flex-1 flex justify-center md:justify-start items-center gap-3">
                 <img
                   src="/logo.png"
@@ -227,7 +227,7 @@ export default function Home() {
                 <span
                   className={`
                     block
-                    text-2xl md:text-3xl
+                    text-xl md:text-4xl
                     font-extrabold tracking-tight
                     bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
                     bg-clip-text text-transparent
@@ -239,25 +239,24 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Right Side: Desktop Menu (Hidden on Mobile) */}
+              {/* Desktop Menu - Hidden on Mobile */}
               <div className="hidden md:flex items-center gap-3">
                 <button 
                   onClick={() => handleScrollToSection('features')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer transition-colors"
+                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
                 >
                   Features
                 </button>
                 <button 
                   onClick={() => handleScrollToSection('platforms')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer transition-colors"
+                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
                 >
                   Platforms
                 </button>
-                <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
+                <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
                   Admin
                 </Link>
               </div>
-
             </div>
           </div>
         </nav>
@@ -276,7 +275,7 @@ export default function Home() {
             >
               <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                India's #1 Micro-Influencer Platform
+                India&#39;s #1 Micro-Influencer Platform
               </span>
             </motion.div>
 
@@ -570,13 +569,13 @@ export default function Home() {
                   <span className="text-yellow-200">Influencer Journey?</span>
                 </h2>
                 <p className="text-lg md:text-xl text-white/80 mb-10 max-w-md mx-auto leading-relaxed">
-                  Join thousands of influencers already earning. It's free to join!
+                  Join thousands of influencers already earning. It&#39;s free to join!
                 </p>
                 <button
                   onClick={() => setShowForm(true)}
                   className="px-10 py-5 bg-white text-violet-700 rounded-2xl font-bold text-lg shadow-xl hover:bg-yellow-100 transition-colors"
                 >
-                  Apply Now — It's Free →
+                  Apply Now — It&#39;s Free →
                 </button>
                 <p className="text-white/60 text-sm mt-8">
                   No credit card required • Setup in 2 minutes
@@ -586,7 +585,7 @@ export default function Home() {
           </div>
         </section>
 
-       {/* ==================== FOOTER ==================== */}
+        {/* ==================== FOOTER ==================== */}
         <footer className="py-20 md:py-24 px-6 border-t border-white/10">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-4 gap-12 mb-16">
@@ -597,18 +596,29 @@ export default function Home() {
                     alt="NanoFluencer Logo"
                     className="h-10 w-auto"
                   />
-                  
+                  <span
+                    className={`
+                      text-xl md:text-2xl
+                      font-extrabold tracking-tight
+                      bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
+                      bg-clip-text text-transparent
+                      animate-gradient
+                      ${sora.className}
+                    `}
+                  >
+                    NanoFluencer
+                  </span>
                 </div>
                 <p className="text-white/40 text-base max-w-xs leading-relaxed">
-                  India's premier platform connecting nano and micro-influencers with top brands.
+                  India&#39;s premier platform connecting nano and micro-influencers with top brands.
                 </p>
               </div>
               
               <div>
                 <h4 className="font-semibold text-white mb-5">Platform</h4>
                 <div className="space-y-4">
-                  <a href="#features" onClick={(e) => { e.preventDefault(); handleScrollToSection('features'); }} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</a>
-                  <a href="#platforms" onClick={(e) => { e.preventDefault(); handleScrollToSection('platforms'); }} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</a>
+                  <button onClick={() => handleScrollToSection('features')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</button>
+                  <button onClick={() => handleScrollToSection('platforms')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</button>
                   <a href="#" className="block text-white/40 hover:text-white text-base transition-colors">For Brands</a>
                 </div>
               </div>
