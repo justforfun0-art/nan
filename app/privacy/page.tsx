@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { sora } from "../fonts"; // Ensure this path is correct
+import { sora } from "../fonts";
 import { motion } from "framer-motion";
 
 export default function PrivacyPolicy() {
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
         >
             <section>
                 <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
-                <p>Welcome to NanoFluencer. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and sign up as an influencer or brand.</p>
+                <p>Welcome to NanoFluencers. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and sign up as an influencer or brand.</p>
             </section>
 
             <section>
@@ -68,11 +68,7 @@ export default function PrivacyPolicy() {
 
             <section>
                 <h2 className="text-2xl font-bold text-white mb-4">6. Contact Us</h2>
-<<<<<<< HEAD
-                <p>If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:nanofluencer@gmail.com" className="text-violet-400 hover:text-violet-300 underline">nanofluencer@gmail.com</a></p>
-=======
                 <p>If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:nanofluencermedia@gmail.com" className="text-violet-400 hover:text-violet-300 underline">nanofluencermedia@gmail.com</a></p>
->>>>>>> ca691ba (New links)
             </section>
         </motion.div>
       </div>
