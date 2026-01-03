@@ -212,7 +212,7 @@ export default function Home() {
       {/* Content wrapper */}
       <div className="relative z-10">
         
-        {/* ==================== NAVIGATION ==================== */}
+               {/* ==================== NAVIGATION ==================== */}
         <nav className="fixed top-0 left-0 right-0 z-50 p-4">
           <div className="max-w-6xl mx-auto">
             <div className="relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
@@ -222,12 +222,12 @@ export default function Home() {
                 <img
                   src="/logo.png"
                   alt="Nanofluencer Logo"
-                  className="h-14 md:h-16 w-auto"
+                  className="h-10 md:h-16 w-auto" 
                 />
-             <span
+                <span
                   className={`
                     block
-                    text-[1.8rem] md:text-4xl  /* CHANGED: Bigger mobile text (approx 29px) */
+                    text-[1.8rem] md:text-4xl
                     font-extrabold tracking-tight
                     text-white
                     bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
@@ -239,25 +239,24 @@ export default function Home() {
                 >
                   NanoFluencers
                 </span>
-                >
-                  NanoFluencer
-                </span>
               </div>
 
               {/* Desktop Menu - Hidden on Mobile */}
               <div className="hidden md:flex items-center gap-3">
-                <button 
-                  onClick={() => handleScrollToSection('features')} 
+                <a 
+                  href="#features"
+                  onClick={(e) => handleScrollToSection(e, 'features')} 
                   className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
                 >
                   Features
-                </button>
-                <button 
-                  onClick={() => handleScrollToSection('platforms')} 
+                </a>
+                <a 
+                  href="#platforms"
+                  onClick={(e) => handleScrollToSection(e, 'platforms')} 
                   className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
                 >
                   Platforms
-                </button>
+                </a>
                 <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
                   Admin
                 </Link>
