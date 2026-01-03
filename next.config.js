@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. Keep your existing image settings
+  // 1. Standalone output reduces memory usage significantly in containers
+  output: "standalone",
+
+  // 2. Increase timeout so Railway doesn't kill the build during static generation
+  staticPageGenerationTimeout: 180,
+
   images: {
     remotePatterns: [
       {
@@ -10,15 +15,12 @@ const nextConfig = {
     ],
   },
 
-  // 2. Disable checks to save memory during build
+  // 3. Keep ignoring TS errors to ensure build finishes
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 
-  // 3. Limit CPU usage to prevent Railway crashes
+  // 4. Keep memory limits
   experimental: {
     workerThreads: false,
     cpus: 1,
