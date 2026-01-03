@@ -1,31 +1,17 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Providers from "./providers";
-import { inter } from "./fonts";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Nanofluencer - The Micro-Influencer Marketplace",
-  description: "Connect with brands and earn money as a nano or micro-influencer in India. Join thousands of creators.",
-  keywords: "influencers, micro-influencers, nano-influencers, India, social media, Instagram, YouTube, Facebook",
-  openGraph: {
-    title: "Nanofluencer - The Micro-Influencer Marketplace",
-    description: "Connect with brands and earn money as a nano or micro-influencer in India.",
-    url: "https://nanofluencer.com",
-    siteName: "Nanofluencer",
-    type: "website",
-  },
-};
+import { ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface ProvidersProps {
+  children: ReactNode;
+}
+
+export default function Providers({ children }: ProvidersProps) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
+    <>
+      <Toaster position="top-right" />
+      {children}
+    </>
   );
 }
