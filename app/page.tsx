@@ -217,33 +217,47 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10">
 
-              {/* Logo - Centered on Mobile, Left on Desktop */}
+              {/* Left Side: Logo + Text */}
               <div className="flex-1 flex justify-center md:justify-start items-center gap-3">
                 <img
                   src="/logo.png"
                   alt="Nanofluencer Logo"
                   className="h-12 md:h-16 w-auto"
                 />
+                <span
+                  className={`
+                    block
+                    text-2xl md:text-3xl
+                    font-extrabold tracking-tight
+                    bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
+                    bg-clip-text text-transparent
+                    animate-gradient
+                    ${sora.className}
+                  `}
+                >
+                  NanoFluencer
+                </span>
               </div>
 
-              {/* Desktop Menu - Hidden on Mobile */}
+              {/* Right Side: Desktop Menu (Hidden on Mobile) */}
               <div className="hidden md:flex items-center gap-3">
                 <button 
                   onClick={() => handleScrollToSection('features')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
+                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer transition-colors"
                 >
                   Features
                 </button>
                 <button 
                   onClick={() => handleScrollToSection('platforms')} 
-                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer"
+                  className="px-4 py-2 text-sm text-white/60 hover:text-white cursor-pointer transition-colors"
                 >
                   Platforms
                 </button>
-                <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20">
+                <Link href="/admin" className="px-5 py-2.5 text-sm font-medium rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
                   Admin
                 </Link>
               </div>
+
             </div>
           </div>
         </nav>
