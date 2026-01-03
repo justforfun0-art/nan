@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -13,33 +15,20 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check environment variables
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-      console.error('Missing email configuration environment variables');
+    // Check environment variable
+    if (!process.env.RESEND_API_KEY) {
+      console.error('Missing RESEND_API_KEY environment variable');
       return NextResponse.json(
         { success: false, error: 'Email service not configured' },
         { status: 500 }
       );
     }
 
-    // Create transporter - optimized for Railway with SSL
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // Use SSL on port 465
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false, // Allow self-signed certificates
-      },
-    });
-
-    const mailOptions = {
-      from: `"NanoFluencer Contact" <${process.env.GMAIL_USER}>`,
-      to: 'nanofluencermedia@gmail.com', // Admin email
-      replyTo: email, // So admin can reply directly to the user
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: 'onboarding@resend.dev', // Use your verified domain later
+      to: 'nanofluencermedia@gmail.com',
+      replyTo: email,
       subject: `[NanoFluencer] ${subject} - from ${firstName} ${lastName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -73,34 +62,22 @@ export async function POST(req: Request) {
           </p>
         </div>
       `,
-      text: `
-New Contact Form Submission
+    });
 
-Name: ${firstName} ${lastName}
-Email: ${email}
-Subject: ${subject}
+    if (error) {
+      console.error('Resend error:', error);
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 500 }
+      );
+    }
 
-Message:
-${message}
-
----
-This email was sent from the NanoFluencer contact form.
-      `,
-    };
-
-    // Verify connection first
-    await transporter.verify();
-    
-    // Send email
-    await transporter.sendMail(mailOptions);
-
+    console.log('Email sent successfully:', data);
     return NextResponse.json({ success: true }, { status: 200 });
+    
   } catch (error) {
     console.error('Email error:', error);
-    
-    // Return more specific error message
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
     return NextResponse.json(
       { success: false, error: `Failed to send email: ${errorMessage}` },
       { status: 500 }
