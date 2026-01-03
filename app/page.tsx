@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -181,6 +182,17 @@ function WalletIcon({ className }: { className?: string }) {
    MAIN PAGE COMPONENT
 ============================================ */
 
+
+export const metadata: Metadata = {
+  title: "Nanofluencer - The Micro-Influencer Marketplace",
+  description: "Connect with brands and earn money as a nano or micro-influencer in India. Join thousands of creators.",
+  openGraph: {
+    title: "Nanofluencer - The Micro-Influencer Marketplace",
+    description: "Connect with brands and earn money as a nano or micro-influencer in India.",
+    type: "website",
+  },
+};
+
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -226,19 +238,7 @@ export default function Home() {
                   className="h-12 md:h-16 w-auto"
                 />
 
-                <span
-                  className={`
-                    block
-                    text-2xl md:text-4xl
-                    font-extrabold tracking-tight
-                    bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
-                    bg-clip-text text-transparent
-                    animate-gradient
-                    ${sora.className}
-                  `}
-                >
-                  NanoFluencer
-                </span>
+                
               </div>
 
               {/* Desktop Menu - Hidden on Mobile */}
@@ -598,18 +598,7 @@ export default function Home() {
                     alt="NanoFluencer Logo"
                     className="h-10 w-auto"
                   />
-                  <span
-                    className={`
-                      text-xl md:text-2xl
-                      font-extrabold tracking-tight
-                      bg-gradient-to-r from-violet-400 via-pink-400 to-amber-300
-                      bg-clip-text text-transparent
-                      animate-gradient
-                      ${sora.className}
-                    `}
-                  >
-                    NanoFluencer
-                  </span>
+                  
                 </div>
                 <p className="text-white/40 text-base max-w-xs leading-relaxed">
                   India's premier platform connecting nano and micro-influencers with top brands.
@@ -619,8 +608,8 @@ export default function Home() {
               <div>
                 <h4 className="font-semibold text-white mb-5">Platform</h4>
                 <div className="space-y-4">
-                  <a href="#features" onClick={(e) => handleScrollToSection(e, 'features')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</a>
-                  <a href="#platforms" onClick={(e) => handleScrollToSection(e, 'platforms')} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</a>
+                  <a href="#features" onClick={(e) => { e.preventDefault(); handleScrollToSection('features'); }} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Features</a>
+                  <a href="#platforms" onClick={(e) => { e.preventDefault(); handleScrollToSection('platforms'); }} className="block text-white/40 hover:text-white text-base transition-colors cursor-pointer">Platforms</a>
                   <a href="#" className="block text-white/40 hover:text-white text-base transition-colors">For Brands</a>
                 </div>
               </div>
