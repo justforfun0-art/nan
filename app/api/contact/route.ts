@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       replyTo: email, // So you can reply directly to the user
       subject: `New Contact Form Submission: ${subject}`,
       html: `
-        <h3>New Message from NanoFluencers Contact Form</h3>
+        <h3>New Message from NanoFluencer Contact Form</h3>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subject:</strong> ${subject}</p>
