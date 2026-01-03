@@ -236,7 +236,7 @@ export default function Home() {
                     ${sora.className}
                   `}
                 >
-                  NanoFluencers
+                  NanoFluencer
                 </span>
               </div>
 
