@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { sora } from "../fonts";
 import { motion } from "framer-motion";
+import SeoWebPageJsonLd from "@/components/SeoWebPageJsonLd";
 
 function MailIcon({ className }: { className?: string }) {
     return (
@@ -35,6 +36,15 @@ export default function ContactUs() {
 
   return (
     <main className="min-h-screen bg-[#0a0118] text-white relative">
+      <SeoWebPageJsonLd
+        path="/contact"
+        title="Contact NanoFluencer"
+        description="Contact NanoFluencer to connect influencers with brands and agencies or to launch a campaign."
+        breadcrumbs={[
+          { name: "Home", url: "https://www.nanofluencer.com/" },
+          { name: "Contact", url: "https://www.nanofluencer.com/contact" },
+        ]}
+      />
       <div className="fixed inset-0 bg-gradient-to-b from-[#0a0118] via-[#0f0520] to-[#0a0118]" />
       
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-32">
