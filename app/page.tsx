@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import InfluencerForm from '@/components/InfluencerForm';
+import SeoWebPageJsonLd from "@/components/SeoWebPageJsonLd";
 import { sora } from "./fonts";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -184,6 +185,50 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const faqs = [
+    {
+      question: "What is NanoFluencer?",
+      answer:
+        "NanoFluencer is a platform that connects nano and micro-influencers with brands and agencies for paid collaborations.",
+    },
+    {
+      question: "Is it free to join?",
+      answer:
+        "Yes. Creating a profile is free and there are no upfront fees or credit card requirements.",
+    },
+    {
+      question: "How do I earn money on NanoFluencer?",
+      answer:
+        "You earn by completing brand campaigns and posting content on your connected social platforms.",
+    },
+    {
+      question: "Which platforms are supported?",
+      answer:
+        "You can connect Instagram, YouTube, and Facebook to participate in campaigns.",
+    },
+    {
+      question: "How does matching work?",
+      answer:
+        "Our matching system pairs you with brands based on your niche, audience, and content fit.",
+    },
+    {
+      question: "How are payments handled?",
+      answer:
+        "Payments are processed directly to your account after campaign completion.",
+    },
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   // Scroll handler for desktop navigation
   const handleScrollToSection = (sectionId: string) => {
@@ -202,6 +247,14 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0a0118] text-white relative">
+      <SeoWebPageJsonLd
+        path="/"
+        title="NanoFluencer - Connect Influencers with Brands"
+        description="NanoFluencer connects influencers with brands and agencies. Earn money by posting on Instagram, grow your influence, and monetize your content."
+        breadcrumbs={[
+          { name: "Home", url: "https://www.nanofluencer.com/" },
+        ]}
+      />
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-b from-[#0a0118] via-[#0f0520] to-[#0a0118]" />
       <div className="fixed inset-0 opacity-20" style={{
@@ -556,6 +609,43 @@ export default function Home() {
               })}
             </div>
           </div>
+        </section>
+
+        {/* ==================== FAQ SECTION ==================== */}
+        <section className="py-24 md:py-32 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-14 md:mb-16">
+              <span className="inline-block px-4 py-2 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 text-sm font-medium mb-6">
+                FAQs
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5">
+                <span className="text-white">Answers to </span>
+                <span className="bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">Common Questions</span>
+              </h2>
+              <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
+                Everything you need to know about joining NanoFluencer and earning with brands.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqs.map((faq) => (
+                <details
+                  key={faq.question}
+                  className="group rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7 hover:border-white/20 transition-colors"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-semibold text-white">
+                    <span>{faq.question}</span>
+                    <span className="ml-4 text-white/50 group-open:text-white transition-colors">+</span>
+                  </summary>
+                  <p className="mt-4 text-white/60 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
         </section>
 
         {/* ==================== CTA SECTION ==================== */}

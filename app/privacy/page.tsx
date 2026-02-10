@@ -1,12 +1,22 @@
 'use client';
 
 import Link from 'next/link';
+import SeoWebPageJsonLd from "@/components/SeoWebPageJsonLd";
 import { sora } from "../fonts";
 import { motion } from "framer-motion";
 
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-[#0a0118] text-white relative">
+      <SeoWebPageJsonLd
+        path="/privacy"
+        title="Privacy Policy | NanoFluencer"
+        description="Read the NanoFluencer privacy policy and how we handle data."
+        breadcrumbs={[
+          { name: "Home", url: "https://www.nanofluencer.com/" },
+          { name: "Privacy Policy", url: "https://www.nanofluencer.com/privacy" },
+        ]}
+      />
       <div className="fixed inset-0 bg-gradient-to-b from-[#0a0118] via-[#0f0520] to-[#0a0118]" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-32">
